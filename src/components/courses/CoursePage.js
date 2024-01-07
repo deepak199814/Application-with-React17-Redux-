@@ -1,20 +1,18 @@
 import React from "react";
 
 class CoursePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      course: {
-        title: "",
-      },
-    };
-    this.handleChange = this.handleChange.bind(this); //function will be bound once it won't reallocate on every render
-  }
-  handleChange(event) {
+  //we can remove constructor and super(props) too but still this clas field
+  state = {
+    course: {
+      title: "",
+    },
+  };
+  handleChange = (event) => {
+    //Arrow function will inherit the binding context of their enclosing scope[class fields]
     const course = { ...this.state.course, title: event.target.value };
     //this.setState({ course: course });
     this.setState({ course });
-  }
+  };
   render() {
     return (
       <form>
