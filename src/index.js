@@ -6,9 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./index.css";
 import App from "./components/App";
-import configureStore from "./store/configureStore";
+import { configureStore as store } from "./store/configureStore";
 
-const store = configureStore();
 render(
   <Provider store={store}>
     <Router>

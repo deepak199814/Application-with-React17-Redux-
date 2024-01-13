@@ -7,15 +7,12 @@ const rootReducer = combineReducers({
   courses,
 });
 
-//Store
-export default function configureStore(initialState) {
-  // REDUX DEV TOOLS
+// REDUX DEV TOOLS
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  const composeEnhancer =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  return createStore(
-    rootReducer,
-    initialState,
-    composeEnhancer(applyMiddleware(reduxImmutableStateInvariant())) //middleware function call
-  );
-}
+//Store
+export const configureStore = createStore(
+  rootReducer,
+  composeEnhancer(applyMiddleware(reduxImmutableStateInvariant())) //middleware function call
+); 
+
