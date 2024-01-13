@@ -21,8 +21,6 @@ class CoursePage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    //1.this.props.dispatch(courseActions.createCourse(this.state.course));
-    // 2.this.props.createCourse(this.state.course);
     this.props.actions.createCourse(this.state.course);
   };
 
@@ -48,8 +46,6 @@ class CoursePage extends React.Component {
 
 CoursePage.propTypes = {
   courses: PropTypes.array.isRequired,
-  //dispatch: PropTypes.func.isRequired,
-  //createCourse: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
