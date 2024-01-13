@@ -1,4 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+
+import * as courseActions from "../../state-management/src/create-course/actions";
 
 class CoursePage extends React.Component {
   //we can remove constructor and super(props) too but still this clas field
@@ -13,10 +17,12 @@ class CoursePage extends React.Component {
     //this.setState({ course: course });
     this.setState({ course });
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    alert(this.state.course.title);
+    this.props.dispatch(courseActions.createCourse(this.state.course));
   };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -27,9 +33,25 @@ class CoursePage extends React.Component {
           onChange={this.handleChange}
           value={this.state.course.title}
         />
+
         <input type="submit" value="Save" />
+        {this.props.courses.map((course) => {
+          return <div key={course.title}>{course.title}</div>;
+        })}
       </form>
     );
   }
 }
-export default CoursePage;
+
+CoursePage.propTypes = {
+  courses: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    courses: state.courses,
+  };
+};
+
+export default connect(mapStateToProps)(CoursePage);
