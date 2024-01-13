@@ -5,7 +5,7 @@ import { PropTypes } from "prop-types";
 import * as courseActions from "../../state-management/src/create-course/actions";
 
 class CoursePage extends React.Component {
-  //we can remove constructor and super(props) too but still this clas field
+  //we can remove constructor and super(props) too but still this is class field
   state = {
     course: {
       title: "",
@@ -20,7 +20,8 @@ class CoursePage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    //this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.createCourse(this.state.course);
   };
 
   render() {
@@ -45,7 +46,8 @@ class CoursePage extends React.Component {
 
 CoursePage.propTypes = {
   courses: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  //dispatch: PropTypes.func.isRequired,
+  createCourse: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -54,4 +56,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(CoursePage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createCourse: (course) => dispatch(courseActions.createCourse(course)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CoursePage);
